@@ -36,12 +36,14 @@ class Turtle:
         # else:
         #     return False
         
-        drawing_len = len(drawing)
-        for i in range(len(self.moves) - drawing_len + 1):
-            if self.moves[i:i+drawing_len] == drawing:
-                return True
-        return False
+        # drawing_len = len(drawing)
+        # for i in range(len(self.moves) - drawing_len + 1):
+        #     if self.moves[i:i+drawing_len] == drawing:
+        #         return True
+        # return False
 
+        return (" ".join(drawing)) in (" ".join(self.moves))
+    
     def __str__(self):
         return f"Turtle is at position ({self.x},{self.y}) and has moved {len(self.moves)} times since start"
 
