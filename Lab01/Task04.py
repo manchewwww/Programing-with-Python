@@ -31,17 +31,6 @@ class Turtle:
         return f"Current configuration: {" | ".join(config)} |"
 
     def check_for_drawing(self, drawing):
-        # if(list(drawing) == self.moves):
-        #     return True
-        # else:
-        #     return False
-        
-        # drawing_len = len(drawing)
-        # for i in range(len(self.moves) - drawing_len + 1):
-        #     if self.moves[i:i+drawing_len] == drawing:
-        #         return True
-        # return False
-
         return (" ".join(drawing)) in (" ".join(self.moves))
     
     def __str__(self):
