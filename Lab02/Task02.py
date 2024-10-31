@@ -4,13 +4,23 @@ def possible_moves(column, row):
 
     def new_position(col_offset, row_offset):
         new_col = chr(ord(column) + col_offset)
-        new_row = row + row_offset 
+        new_row = row + row_offset
         return new_col, new_row
 
-    return filter(
-        lambda pos: "a" <= pos[0] <= "h" and 1 <= pos[1] <= 8,
-        map(lambda offset: new_position(*offset), offsets),
+    return (
+        pos
+        for column, row in offsets
+        if (
+            (pos := new_position(column, row))
+            and "a" <= pos[0] <= "h"
+            and 1 <= pos[1] <= 8
+        )
     )
+
+    # return filter(
+    #     lambda pos: "a" <= pos[0] <= "h" and 1 <= pos[1] <= 8,
+    #     map(lambda offset: new_position(*offset), offsets),
+    # )
 
 
 # 2 possible moves
