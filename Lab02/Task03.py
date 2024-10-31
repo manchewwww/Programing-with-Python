@@ -23,13 +23,15 @@ actual_4 = list(take(sample, 4))
 expected_5 = [5, 6]
 actual_5 = list(take(sample, -2))
 
-expected_5 = [3, 4, 5, 6]
-actual_5 = list(take(sample, -4))
+expected_6 = [3, 4, 5, 6]
+actual_6 = list(take(sample, -4))
 
 assert expected_1 == actual_1
 assert expected_2 == actual_2
 assert expected_3 == actual_3
 assert expected_4 == actual_4
 assert expected_5 == actual_5
+assert expected_6 == actual_6
+
 
 print("✅ All OK! +0.75 points")
