@@ -17,11 +17,6 @@ def possible_moves(column, row):
         )
     )
 
-    # return filter(
-    #     lambda pos: "a" <= pos[0] <= "h" and 1 <= pos[1] <= 8,
-    #     map(lambda offset: new_position(*offset), offsets),
-    # )
-
 
 # 2 possible moves
 assert set(possible_moves("a", 1)) == {("c", 2), ("b", 3)}
