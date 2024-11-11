@@ -18,6 +18,8 @@ import math
 
 def majorityElement(nums):
     count_nums = Counter(nums)
+
+    # return count_nums.most_common(1)[0][0]
     majority_element = [
         num for num, value in count_nums.items() if value > (len(nums) // 2)
     ][0]

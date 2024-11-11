@@ -11,11 +11,6 @@
 
 
 def kWeakestRows(mat, k):
-    """
-    :type mat: List[List[int]]
-    :type k: int
-    :rtype: List[int]
-    """
     strenghts = [(row.count(1), i) for i, row in enumerate(mat)]
     strenghts.sort()
     return [i for _, i in strenghts[:k]]

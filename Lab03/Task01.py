@@ -10,13 +10,11 @@
 
 # https://leetcode.com/problems/valid-anagram/description/
 
+from collections import Counter
+
 
 def isAnagram(s, t):
-    s_list = list(s)
-    s_list.sort()
-    t_list = list(t)
-    t_list.sort()
-    return s_list == t_list
+    return Counter(s) == Counter(t)
 
 
 s = "car"
