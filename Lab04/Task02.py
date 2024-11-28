@@ -3,14 +3,16 @@ class LAIKA:
         self.directory = directory
         self.caesar_key = caesar_key
 
-    def caesar_cipher(self, text, shift):
+    def caesar_cipher(self, text: str) -> str:
         result = []
         for char in text:
             if char.isalpha():
                 base = ord("A") if char.isupper() else ord("a")
-                result.append(chr((ord(char) - base + shift) % 26 + base))
+                result.append(chr((ord(char) - base + self.caesar_key) % 26 + base))
             elif char.isdigit():
-                result.append(chr((ord(char) - ord("0") + shift) % 10 + ord("0")))
+                result.append(
+                    chr((ord(char) - ord("0") + self.caesar_key) % 10 + ord("0"))
+                )
             else:
                 result.append(char)
         return "".join(result)
@@ -53,7 +55,7 @@ class LAIKA:
         file_names = []
 
         for chunk in chunks:
-            file_name = self.caesar_cipher(chunk, self.caesar_key)
+            file_name = self.caesar_cipher(chunk)
             if file_name in file_names or os.path.exists(
                 os.path.join(self.directory, file_name)
             ):
@@ -69,7 +71,7 @@ class LAIKA:
                 f.write(f"{chunk}")
 
         return file_names[0]
-    
+
     def decode_from_files(self, start_file: str) -> str:
 
         current_file = start_file
@@ -78,23 +80,20 @@ class LAIKA:
             file_path = os.path.join(self.directory, current_file)
             if not os.path.exists(file_path):
                 raise FileNotFoundError("File not found: " + current_file)
-            
+
             with open(file_path, "r") as f:
                 current_file = f.readline().strip()
                 chunks.append(f.readline().strip())
 
         return self.decode(chunks)
-        
     
-
-
 # Tests
 
 # Preconditions
 import os
 
 root_dir = "task_2"
-# os.makedirs(root_dir)
+os.makedirs(root_dir)
 
 l = LAIKA(root_dir, 3)
 
