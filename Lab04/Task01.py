@@ -40,7 +40,7 @@ def validate_list(file_path: str) -> float:
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             lines = [line.strip() for line in file.readlines()]
-    except Exception:
+    except FileNotFoundError:
         raise ListFileError(file_path)
 
     total_sum = 0
@@ -73,6 +73,7 @@ def validate_list(file_path: str) -> float:
                 raise InvalidPriceError(price, item) 
         except ValueError:
             raise InvalidPriceError(price_str, item)
+        
         total_sum += (int(quantity) * float(price))
 
     return total_sum
@@ -139,4 +140,4 @@ try:
 except InvalidLineError:
     pass
 
-print("✅ All OK! +1 point")
+print(" All OK! +1 point")
