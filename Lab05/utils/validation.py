@@ -1,5 +1,4 @@
 def validate_arguments(args):
-    """Validate command-line arguments."""
     if len(args) != 4:
         return False
 

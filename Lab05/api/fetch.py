@@ -1,4 +1,3 @@
-# api/fetch.py
 import aiohttp
 import asyncio
 from typing import List, Dict
@@ -9,7 +8,6 @@ HEADERS = {
 }
 
 async def fetch_trending(media_type: str, time_window: str) -> List[Dict]:
-    """Fetch trending data from the API."""
     async with aiohttp.ClientSession() as session:
         url = API_URL.format(media_type=media_type, time_window=time_window)
         async with session.get(url, headers=HEADERS) as response:
@@ -28,7 +26,6 @@ async def fetch_trending(media_type: str, time_window: str) -> List[Dict]:
 
 
 async def fetch_all_trending(time_window: str) -> List[Dict]:
-    """Fetch both movies and TV shows concurrently."""
     async with aiohttp.ClientSession() as session:
         movies_task = fetch_trending("movie", time_window)
         tv_task = fetch_trending("tv", time_window)
