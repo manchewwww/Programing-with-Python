@@ -31,3 +31,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ask for venv\Scripts\activate.bat
