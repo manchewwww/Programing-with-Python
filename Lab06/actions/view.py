@@ -1,28 +1,24 @@
-import json
+"""
+view.py: file for view function
+"""
 
-def view(title):
-    notes = None
-    import os
+from actions.commands import load_file_data
+from actions.commands import validate_for_missing_title
+from actions.commands import validete_for_not_existing_title
 
-    if os.path.exists("notes.json"):
-        with open("notes.json", "r") as f:
-            try:
-                notes = json.load(f)
-            except:
-                notes = {}
+
+def view(title:str) -> None:
+    """
+    function for adding new notes
+    """
+    notes = load_file_data()
+    validate_for_missing_title(title)
+    validete_for_not_existing_title(title, notes)
+    print(title)
+    print("---")
+    print(notes[title]["content"])
+    print("---")
+    if notes[title].get("due_date", False):  # edit this get
+        print("Due:" + notes[title]["due_date"])
     else:
-        notes = {}
-
-    if title == "":
-        print("Need title.")
-    elif title not in notes:
-        print("Doesn't exist.")
-    else:
-        print(title)
-        print("---")
-        print(notes[title]["content"])
-        print("---")
-        if notes[title]["due_date"]:
-            print("Due:" + notes[title]["due_date"])
-        else:
-            print("No due date.")
+        print("No due date.")

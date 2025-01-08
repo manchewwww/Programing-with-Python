@@ -1,36 +1,28 @@
+"""
+add.py: file for add function
+"""
+
 import json
+from actions.commands import load_file_data
+from actions.commands import validate_for_missing_title
+from actions.commands import validate_for_missing_content
+from actions.commands import validate_for_existing_title
 
 
-def add(title, content, due_date):
-    notes = None
-    import os
-    
-    if os.path.exists("notes.json"):
-        with open("notes.json", "r") as f:
-            try:
-                notes = json.load(f)
-            except:
-                notes = {}
+def add(title:str, content:str, due_date:str) -> None:
+    """
+    function for adding new notes
+    """
+    notes = load_file_data()
+    validate_for_missing_title(title)
+    validate_for_missing_content(content)
+    validate_for_existing_title(title, notes)
+    if due_date:
+        notes[title] = {"content": content, "due_date": due_date}
     else:
-        notes = {}
-
-    if title == "":
-            print("No title, can't add note.")
-    elif content == "":
-        print("No content, can't add note.")
-    else:
-        if title in notes:
-            print("Already exists, won't overwrite.")
-        else:
-            if due_date:
-                notes[title] = {
-                    "content": content,
-                    "due_date": due_date
-                }
-            else:
-                notes[title] = {
-                    "content": content,
-                }
-            with open("notes.json", "w") as f:
-                f.write(json.dumps(notes))
-            print("Added new note", title)
+        notes[title] = {
+            "content": content,
+        }
+    with open("notes.json", "w", encoding="utf-8") as f:
+        f.write(json.dumps(notes))
+    print("Added new note", title)
